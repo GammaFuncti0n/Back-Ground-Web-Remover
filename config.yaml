@@ -1,0 +1,8 @@
+# Здесь описаны модели, используемые для удаления фона на изображении:
+# - white_border: placeholder удаляет только края изображения
+# - deeplabv3_mobilenet: модель на основе DeepLabV3-MobileNet
+# - deeplabv3plus_resnet101: модель на основе DeepLabV3+ ResNet-101
+# - birefnet: веса с Hugging Face (ZhengPeng7/BiRefNet)
+# - isnet: IS-Net (DIS), веса скачиваются при старте
+
+processor: 'birefnet'

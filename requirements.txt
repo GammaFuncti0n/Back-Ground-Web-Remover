@@ -1,0 +1,15 @@
+pyyaml
+fastapi
+uvicorn
+python-multipart
+pillow
+httpx
+jinja2
+torch
+torchvision
+numpy
+huggingface_hub
+transformers
+einops
+kornia
+timm

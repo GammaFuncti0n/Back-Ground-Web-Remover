@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BG Removal</title>
+  <style>
+    :root {
+      --bg: #f0f2f5;
+      --fg: #1a1a1a;
+      --accent: #1f6feb;
+      --muted: #5c6570;
+      --err: #b42318;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: linear-gradient(160deg, #e8eef6 0%, #f5f0ea 100%);
+      color: var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    main {
+      width: min(420px, 100%);
+    }
+    h1 {
+      margin: 0 0 0.35rem;
+      font-size: 1.75rem;
+      letter-spacing: -0.02em;
+    }
+    p {
+      margin: 0 0 1.25rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    input[type="file"] {
+      font-size: 0.9rem;
+    }
+    button {
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.7rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover { filter: brightness(1.05); }
+    .error {
+      margin-top: 1rem;
+      color: var(--err);
+      font-size: 0.9rem;
+    }
+    .result {
+      margin-top: 1.5rem;
+    }
+    .result img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background:
+        linear-gradient(45deg, #ddd 25%, transparent 25%),
+        linear-gradient(-45deg, #ddd 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #ddd 75%),
+        linear-gradient(-45deg, transparent 75%, #ddd 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+      background-color: #fff;
+    }
+    .result a {
+      display: inline-block;
+      margin-top: 0.75rem;
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>BG Removal</h1>
+    <p>Загрузите фото.</p>
+    <form method="post" enctype="multipart/form-data" action="/">
+      <input type="file" name="file" accept="image/*" required />
+      <button type="submit">Удалить фон</button>
+    </form>
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+    {% if result_b64 %}
+    <div class="result">
+      <img src="data:image/png;base64,{{ result_b64 }}" alt="Результат" />
+      <a href="data:image/png;base64,{{ result_b64 }}" download="result.png">Скачать PNG</a>
+    </div>
+    {% endif %}
+  </main>
+</body>
+</html>
